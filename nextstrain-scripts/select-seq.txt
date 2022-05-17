@@ -1,0 +1,81 @@
+#!/bin/sh
+
+#clean and sub-select your covid sequences from (a) Madagascar, (b) Africa, (c) Europe, and (d) Globe 
+
+#first, clean sequences
+python3 scripts/sanitize_sequences.py \
+    --sequences sequence-prep/allGISAID_sequences_fasta_2022_04_01.tar.xz \
+    --strip-prefixes "hCoV-19/" \
+    --output sequence-prep/sequences_gisaid.fasta
+
+#then, index them
+augur index \
+    --sequences sequence-prep/sequences_gisaid.fasta \
+    --output sequence-prep/sequence_index_gisaid.tsv.gz
+
+#then, clean metadata
+
+python3 scripts/sanitize_metadata.py \
+    --metadata sequence-prep/allGISAID_metadata_2022_04_01.tsv \
+    --database-id-columns "Accession ID" \
+    --parse-location-field Location \
+    --rename-fields 'Virus name=strain' 'Accession ID=gisaid_epi_isl' 'Collection date=date' \
+    --strip-prefixes "hCoV-19/" \
+    --output sequence-prep/metadata_gisaid.tsv
+
+#then, select madagascar data
+
+augur filter \
+    --metadata sequence-prep/metadata_gisaid.tsv \
+    --query "(country == 'Madagascar')" \
+    --min-date 2019-11-01 \
+    --max-date 2021-07-18 \
+    --exclude-ambiguous-dates-by any \
+    --output-strains sequence-prep/strains_madagascar.txt
+
+#and contextual strains from Africa
+augur filter \
+    --metadata sequence-prep/metadata_gisaid.tsv \
+    --query "(region == 'Africa') & (country != 'Madagascar')" \
+    --min-date 2019-11-01 \
+    --max-date 2021-07-18 \
+    --exclude-ambiguous-dates-by any \
+    --subsample-max-sequences 1000 \
+    --output-strains sequence-prep/strains_africa.txt
+
+
+#and contextual strains from Europe
+augur filter \
+    --metadata sequence-prep/metadata_gisaid.tsv \
+    --query "(region == 'Europe')" \
+    --min-date 2019-11-01 \
+    --max-date 2021-07-18 \
+    --exclude-ambiguous-dates-by any \
+    --subsample-max-sequences 1000 \
+    --output-strains sequence-prep/strains_europe.txt
+
+#and from Globe outside of Africa and Europe
+
+augur filter \
+    --metadata sequence-prep/metadata_gisaid.tsv \
+    --query "(region != 'Africa') & (region != 'Europe')" \
+    --min-date 2019-11-01 \
+    --max-date 2021-07-18 \
+    --exclude-ambiguous-dates-by any \
+    --subsample-max-sequences 1000 \
+    --group-by region year month \
+    --output-strains sequence-prep/strains_global.txt
+
+#then, use augur to select these from the main file
+
+augur filter \
+    --metadata sequence-prep/metadata_gisaid.tsv \
+    --sequence-index sequence-prep/sequence_index_gisaid.tsv.gz \
+    --sequences sequence-prep/sequences_gisaid.fasta \
+    --exclude-all \
+    --include sequence-prep/strains_madagascar.txt sequence-prep/strains_africa.txt sequence-prep/strains_europe.txt sequence-prep/strains_global.txt \
+    --output-metadata sequence-prep/subsampled_metadata_gisaid.tsv \
+    --output-sequences sequence-prep/subsampled_sequences_gisaid.fasta
+
+#now doctor the location data as desired before inputting into nextstrain build
+
