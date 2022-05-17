@@ -1,0 +1,10 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+.DS_Store
+allGISAID_metadata_2022_04_01.tsv
+allGISAID_sequences_fasta_2022_04_01.tar.xz
+metadata_gisaid.tsv
+sequence_index_gisaid.tsv.gz
+sequences_gisaid.fasta
