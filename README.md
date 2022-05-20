@@ -32,17 +32,19 @@ sh -e select-seq.txt
 
 4. Copy your subselected sequence file ("nextstrain-scripts/sequence-prep/subsampled_sequences_gisaid.fasta") and edited metadata file ("nextstrain-scripts/sequence-prep/subsampled_metadata_gisaid_edit.tsv") to the "data" subfolder of your local "ncov" repo and set up your nexstrain build.
 
-5. We include the the source files for the Madagascar Nextstrain build in this repo under "nextstrain-scripts/builds/Madagascar" for ease of viewing here. To run the build, copy the "Madagascar" folder stored here in the "nexstrain-scripts/builds" subfolder into the "my_profiles" subfolder of your local 'ncov' repo. Visit the Nextstrain website [here](https://docs.nextstrain.org/projects/ncov/en/latest/guides/workflow-config-file.html) for details on how to edit the specifications of this build.
+5. Copy the two files from the "default-edits" subfolder of the nextstrain-scripts folder into the "defaults" folder in the ncov repo. These will be "color_ordering.tsv" and "lat_longs.tsv".
 
-6. Then, within the your local ncov main repository, kick off your build with the following command line command:
+6. We include the the source files for the Madagascar Nextstrain build in this repo under "nextstrain-scripts/builds/Madagascar" for ease of viewing here. To run the build, copy the "Madagascar" folder stored here in the "nexstrain-scripts/builds" subfolder into the "my_profiles" subfolder of your local 'ncov' repo. Visit the Nextstrain website [here](https://docs.nextstrain.org/projects/ncov/en/latest/guides/workflow-config-file.html) for details on how to edit the specifications of this build.
+
+7. Then, within the your local ncov main repository, kick off your build with the following command line command:
 ```
 snakemake --profile my_profiles/Madagascar -p
 ```
 
-9. Once complete (it will take a few hours to build), it will produce an "auspice" folder within ncov, which we include here (slightly edited ad-hoc to make clade_membership the default coloring scheme). This folder powers the genome visualization linked below.
+8. Once complete (it will take a few hours to build), it will produce an "auspice" folder within ncov, which we include here (slightly edited ad-hoc to make clade_membership the default coloring scheme). This folder powers the genome visualization linked below.
 
-10. Visualize the output in auspice at: [https://nextstrain.org/community/brooklabteam/ncov-Madagascar](https://nextstrain.org/community/brooklabteam/ncov-Madagascar)
+9. Visualize the output in auspice at: [https://nextstrain.org/community/brooklabteam/ncov-Madagascar](https://nextstrain.org/community/brooklabteam/ncov-Madagascar)
 
-11. Once you've completed the Nextstrain build, go to the [ncov-Madagascar-private](https://github.com/brooklabteam/ncov-Madagascar-private) repo for additional analyses.
+10. Once you've completed the Nextstrain build, go to the [ncov-Madagascar-private](https://github.com/brooklabteam/ncov-Madagascar-private) repo for additional analyses.
 
 
