@@ -16,7 +16,7 @@ See [here](https://docs.nextstrain.org/projects/ncov/en/latest/analysis/setup.ht
 conda activate nexstrain
 ```
 
-3. For this analysis, we constructed our own SARS-CoV-2 metadata. These curated metadata files are already included in this repository, so *feel free to skip to step #4 to proceed* unless you want to practice the manual download. We do not include the upstream raw metadata files here due to their large size. If, however, you would like to try, please follow these instructions:
+3. For this analysis, we constructed our own SARS-CoV-2 metadata. These curated metadata files are already included in this repository, so *feel free to skip to step #4 to proceed* unless you want to practice the manual download. We do not include the upstream raw metadata files here due to their large size. If, however, you would like to try, please follow the instructions below:
 
 - Downlaod all SARS-CoV-2 sequences and metadata from GISAID. Go to "EpiCoV:Downloads", then pick "FASTA" and "metadata". Unzip the metadata and place the metadata .tsv ("allGISAID_metadata_2022_04_01.tsv") and the fasta zip file ("allGISAID_sequences_fasta_2022_04_01.tar.xz") in a new "sequence-prep" subfolder of your ncov clone. We have included this "nextstrain-scripts/sequence-prep" subfolder in this GitHub repo for ease of access to the data -- however, it does not include the initial dataset due to overlarge file size.
 
@@ -32,7 +32,7 @@ sh -e select-seq.txt
 
 4. Copy your subselected sequence file ("nextstrain-scripts/sequence-prep/subsampled_sequences_gisaid.fasta") and edited metadata file ("nextstrain-scripts/sequence-prep/subsampled_metadata_gisaid_edit.tsv") to the "data" subfolder of your local "ncov" repo and set up your nexstrain build.
 
-5. We include the the source files for the Madagascar Nextstrain build in this repo under "nextstrain-scripts/builds/Madagascar" for ease of viewing here. To run the build, copy the "Madagascar" folder stored here in the "nexstrain-scripts/builds" subfolder into the "my_profiles" subfolder of your local 'ncov' repo. Visit the Nextstrain website [here](https://docs.nextstrain.org/projects/ncov/en/latest/analysis/running.html) for details on how to edit the specifications of this build.
+5. We include the the source files for the Madagascar Nextstrain build in this repo under "nextstrain-scripts/builds/Madagascar" for ease of viewing here. To run the build, copy the "Madagascar" folder stored here in the "nexstrain-scripts/builds" subfolder into the "my_profiles" subfolder of your local 'ncov' repo. Visit the Nextstrain website [here](https://docs.nextstrain.org/projects/ncov/en/latest/guides/workflow-config-file.html) for details on how to edit the specifications of this build.
 
 6. Then, within the your local ncov main repository, kick off your build with the following command line command:
 ```
