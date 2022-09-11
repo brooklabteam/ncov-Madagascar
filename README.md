@@ -45,6 +45,6 @@ snakemake --profile my_profiles/Madagascar -p
 
 9. Visualize the output in auspice at: [https://nextstrain.org/community/brooklabteam/ncov-Madagascar](https://nextstrain.org/community/brooklabteam/ncov-Madagascar)
 
-10. Once you've completed the Nextstrain build, go to the [ncov-Madagascar-private](https://github.com/brooklabteam/ncov-Madagascar-private) repo for additional analyses.
+10. Once you've completed the Nextstrain build, go to the [ncov-Madagascar-analysis](https://github.com/brooklabteam/ncov-Madagascar-analysis) repo for additional analyses.
 
 
