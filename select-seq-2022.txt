@@ -16,7 +16,7 @@ augur index \
 #then, clean metadata
 
 python3 scripts/sanitize_metadata.py \
-    --metadata sequence-prep/allGISAID_metadata_2022_04_01.tsv \
+    --metadata sequence-prep/allGISAID_metadata_tsv_2022_11_10.tsv \
     --database-id-columns "Accession ID" \
     --parse-location-field Location \
     --rename-fields 'Virus name=strain' 'Accession ID=gisaid_epi_isl' 'Collection date=date' \
